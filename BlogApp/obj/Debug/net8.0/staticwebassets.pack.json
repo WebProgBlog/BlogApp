@@ -13,6 +13,42 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\blogs\\1.jpg",
+      "PackagePath": "staticwebassets\\img\\blogs\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\blogs\\2.jpg",
+      "PackagePath": "staticwebassets\\img\\blogs\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\blogs\\3.jpg",
+      "PackagePath": "staticwebassets\\img\\blogs\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\blogs\\4.jpg",
+      "PackagePath": "staticwebassets\\img\\blogs\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\blogs\\5.jpg",
+      "PackagePath": "staticwebassets\\img\\blogs\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\blogs\\6.jpeg",
+      "PackagePath": "staticwebassets\\img\\blogs\\6.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\profiles\\pp1.jpg",
+      "PackagePath": "staticwebassets\\img\\profiles\\pp1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\profiles\\pp2.jpg",
+      "PackagePath": "staticwebassets\\img\\profiles\\pp2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\img\\profiles\\pp3.jpg",
+      "PackagePath": "staticwebassets\\img\\profiles\\pp3.jpg"
+    },
+    {
       "Id": "C:\\Users\\icllm\\BlogApp\\BlogApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

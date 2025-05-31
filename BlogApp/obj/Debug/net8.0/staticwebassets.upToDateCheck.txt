@@ -1,5 +1,14 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\img\blogs\1.jpg
+wwwroot\img\blogs\2.jpg
+wwwroot\img\blogs\3.jpg
+wwwroot\img\blogs\4.jpg
+wwwroot\img\blogs\5.jpg
+wwwroot\img\blogs\6.jpeg
+wwwroot\img\profiles\pp1.jpg
+wwwroot\img\profiles\pp2.jpg
+wwwroot\img\profiles\pp3.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

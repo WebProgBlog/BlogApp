@@ -171,3 +171,5 @@ C:\Users\icllm\BlogApp\BlogApp\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.W
 C:\Users\icllm\BlogApp\BlogApp\obj\Debug\net8.0\BlogApp.csproj.AssemblyReference.cache
 C:\Users\icllm\BlogApp\BlogApp\obj\Debug\net8.0\BlogApp.sourcelink.json
 C:\Users\icllm\BlogApp\BlogApp\obj\Debug\net8.0\BlogApp.csproj.Up2Date
+C:\Users\icllm\BlogApp\BlogApp\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\icllm\BlogApp\BlogApp\bin\Debug\net8.0\libman.json
