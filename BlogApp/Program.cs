@@ -1,3 +1,5 @@
+using BlogApp.BusinessLayer.Abstract;
+using BlogApp.BusinessLayer.Concrete;
 using BlogApp.Data.Concrete.EfCore;
 using BlogApp.DataLayer.Abstract;
 using BlogApp.DataLayer.Concrete.EfCore;
@@ -13,6 +15,14 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 
 builder.Services.AddScoped<IBlogRepository, EfBlogRepository>();
 builder.Services.AddScoped<ICategoryRepository, EfCategoryRepository>();
+builder.Services.AddScoped<ICommentRepository, EfCommentRepository>();
+builder.Services.AddScoped<IUserRepository, EfUserRepository>();
+
+builder.Services.AddScoped<IBlogService, BlogManager>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<ICommentService, CommentManager>();
+builder.Services.AddScoped<IUserService, UserManager>();
+
 
 
 
@@ -28,6 +38,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 SeedData.TestData(app);
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
