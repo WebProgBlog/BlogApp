@@ -33,5 +33,10 @@ namespace BlogApp.BusinessLayer.Concrete
         {
             return _commentRepository.GetCommentsByBlogId(blogId);
         }
+
+        public Comment GetCommentById(int id)
+        {
+            return _commentRepository.GetCommentById(id);
+        }
     }
 }

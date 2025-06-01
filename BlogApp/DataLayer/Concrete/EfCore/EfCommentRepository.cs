@@ -25,6 +25,12 @@ namespace BlogApp.DataLayer.Concrete.EfCore
             _context.SaveChanges();
         }
 
+        public Comment GetCommentById(int id)
+        {
+            return _context.Comments.FirstOrDefault(c => c.CommentId == id);
+        }
+        
+
         public List<Comment> GetCommentsByBlogId(int blogId)
         {
             var comments = _context.Comments

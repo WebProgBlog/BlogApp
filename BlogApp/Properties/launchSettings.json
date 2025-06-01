@@ -9,20 +9,22 @@
     }
   },
   "profiles": {
-    "http": {
+    "BlogApp": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5126",
+      "launchUrl": "",
+      "applicationUrl": "https://localhost:7279;http://localhost:5126",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "Swagger": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7279;http://localhost:5126",
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:7280;http://localhost:5127",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

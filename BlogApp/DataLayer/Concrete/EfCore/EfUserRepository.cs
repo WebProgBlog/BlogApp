@@ -66,6 +66,19 @@ namespace BlogApp.DataLayer.Concrete.EfCore
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public User GetByUserId(int id)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserId == id);
+        }
 
+        public void DeleteUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+        }
     }
 }
