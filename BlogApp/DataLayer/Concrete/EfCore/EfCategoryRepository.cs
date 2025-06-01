@@ -23,5 +23,12 @@ namespace BlogApp.DataLayer.Concrete.EfCore
             await _context.Categories.AddAsync(category);
             await _context.SaveChangesAsync();
         }
+
+       
+
+        void ICategoryRepository.GetCategoryById(int id)
+        {
+            _context.Categories.FirstOrDefault(c => c.CategoryId == id);
+        }
     }
 }

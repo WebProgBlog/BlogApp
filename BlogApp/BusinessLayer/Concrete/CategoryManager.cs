@@ -28,5 +28,13 @@ namespace BlogApp.BusinessLayer.Concrete
         {
             return _categoryRepository.CreateCategoryAsync(category);
         }
+
+     
+
+        public Category GetCategoryById(int id)
+        {
+            return _categoryRepository.Categories.FirstOrDefault(c => c.CategoryId == id);
+        }
+
     }
 }

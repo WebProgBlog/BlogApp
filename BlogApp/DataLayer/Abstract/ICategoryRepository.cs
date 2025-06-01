@@ -6,7 +6,7 @@ namespace BlogApp.DataLayer.Abstract
     {
         IQueryable<Category> Categories { get; }
         void CreateTag(Category Category);
-
+        void GetCategoryById(int id);
         Task CreateCategoryAsync(Category category);
     }
 }

@@ -10,6 +10,8 @@ namespace BlogApp.BusinessLayer.Abstract
         User ValidateUser(string email, string password);
         Task<bool> UpdateUserImage(int userId, string imageName);
         void UpdateUser(User user);
+        User GetUserById(int userId);
+        void DeleteUser(int userId);
         Task<bool> SaveChangesAsync();
     }
 }

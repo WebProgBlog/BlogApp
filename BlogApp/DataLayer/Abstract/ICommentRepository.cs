@@ -8,6 +8,7 @@ namespace BlogApp.DataLayer.Abstract
 
         void CreateComment(Comment comment);
         void DeleteComment(Comment comment);
+        Comment GetCommentById(int id);
         List<Comment> GetCommentsByBlogId(int blogId);
     }
 }
