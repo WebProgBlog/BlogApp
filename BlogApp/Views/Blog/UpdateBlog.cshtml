@@ -1,0 +1,112 @@
+﻿@model BlogApp.Models.BlogUpdateViewModel
+
+@{
+    ViewData["Title"] = "Blog Düzenle";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Blog Yazısı Düzenle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Blog" asp-action="UpdateBlog" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        <input type="hidden" asp-for="BlogId" />
+                        <input type="hidden" asp-for="Image" />
+
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Başlık</label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Url" class="form-label"> URL </label>
+                            <input asp-for="Url" class="form-control" />
+                            <span asp-validation-for="Url" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CategoryId" class="form-label">Kategori</label>
+                            <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories">
+                                <option value="">Kategori seçiniz</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Content" class="form-label">İçerik</label>
+                            <textarea asp-for="Content" id="Content" class="form-control" rows="10"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mevcut Resim</label>
+                            @if (!string.IsNullOrEmpty(Model.ImageName))
+                            {
+                                    <div class="mb-2">
+                                        <img src="~/img/blogs/@Model.ImageName" alt="Blog Görseli" class="img-thumbnail" style="max-height: 200px" />
+                                    </div>
+                            }
+                            else
+                            {
+                                    <p>Henüz bir görsel yüklenmemiş.</p>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Image">Yeni Görsel Yükle</label>
+                            <input asp-for="Image" class="form-control-file" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-controller="User" asp-action="MyBlogs" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-1"></i>Geri Dön
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save me-1"></i>Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+        <script src="~/lib/tinymce/tinymce.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                tinymce.init({
+                    selector: '#Content',
+                    height: 500,
+                    plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'help', 'wordcount'
+                    ],
+                    toolbar: 'undo redo | blocks | ' +
+                        'bold italic backcolor | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+                    branding: false,
+                    promotion: false,
+                    menubar: 'file edit view insert format tools table help',
+                    language: 'tr',
+                    setup: function (editor) {
+                        editor.on('change', function () {
+                            tinymce.triggerSave();
+                        });
+                    }
+                });
+            });
+        </script>
+
+
+}

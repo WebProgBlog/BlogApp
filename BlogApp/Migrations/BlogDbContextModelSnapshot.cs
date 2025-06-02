@@ -174,6 +174,11 @@ namespace BlogApp.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(50)

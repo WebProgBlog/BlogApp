@@ -8,7 +8,7 @@ namespace BlogApp.DataLayer.Abstract
         void CreateUser(User user);
         User ValidateUser(string email, string password);
         User GetByUserId(int id);
-        void DeleteUser(int id);
+        void DeleteUser(User user);
         Task<bool> UpdateUserImage(int userId, string imageName);
         void UpdateUser(User user);
         Task<bool> SaveChangesAsync();

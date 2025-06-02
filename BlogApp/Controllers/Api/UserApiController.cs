@@ -54,7 +54,7 @@ namespace BlogApp.Controllers.Api
             if (user == null)
                 return NotFound();
 
-            _userService.DeleteUser(id);
+            _userService.DeleteUser(user);
             return NoContent();
         }
     }
