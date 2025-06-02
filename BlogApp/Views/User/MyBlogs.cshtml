@@ -1,0 +1,151 @@
+﻿@model BlogApp.Models.BlogViewModel
+
+@{
+    ViewData["Title"] = "Blog Yazılarım";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i>Blog Yazılarım</h4>
+                </div>
+                <div class="card-body">
+                    @if (TempData["BlogDeleteSuccess"] != null)
+                    {
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>@TempData["BlogDeleteSuccess"]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                    }
+                    @if (TempData["BlogUpdateSuccess"] != null)
+                    {
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>@TempData["BlogUpdateSuccess"]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                    }
+                    @if (!Model.Blogs.Any())
+                    {
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Henüz yayınlanmış bir blog yazınız bulunmamaktadır.
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <a asp-controller="Blog" asp-action="CreateBlog" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-2"></i>Yeni Blog Yazısı Ekle
+                                </a>
+                            </div>
+                    }
+                    else
+                    {
+                            <div class="list-group">
+                            @foreach (var blog in Model.Blogs)
+                            {
+                                        <div class="list-group-item list-group-item-action p-3 mb-3 border rounded">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <img src="~/img/blogs/@blog.Image" class="img-fluid rounded" alt="@blog.Title">
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="d-flex justify-content-between">
+                                                        <h5 class="mb-1">@blog.Title</h5>
+                                                        <span class="badge bg-success rounded-pill">Yayında</span>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <span class="badge bg-secondary">@blog.Category.CategoryName</span>
+                                                        <small class="text-muted ms-2">@blog.CreatedDate.ToString("dd MMMM yyyy")</small>
+                                                    </div>
+                                                    <p>
+                                                @{
+                                                    var plainText = System.Text.RegularExpressions.Regex.Replace(blog.Content, "<.*?>", string.Empty);
+                                                    plainText = System.Web.HttpUtility.HtmlDecode(plainText);
+                                                    var truncatedText = plainText.Length > 100 ? plainText.Substring(0, 100) + "..." : plainText;
+                                                }
+                                                @truncatedText
+                                                    </p>
+                                                    <div class="d-flex justify-content-end gap-2">
+                                                        <a href="/blog/@blog.Url" class="btn btn-sm btn-outline-primary">
+                                                            <i class="bi bi-eye me-1"></i>Görüntüle
+                                                        </a>
+                                                        <a href="@Url.Action("UpdateBlog", "Blog", new { id = blog.BlogId })" class="btn btn-sm btn-outline-secondary">
+                                                            <i class="bi bi-pencil me-1"></i>Düzenle
+                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                data-bs-toggle="modal" data-bs-target="#deleteModal_@(blog.BlogId)">
+                                                            <i class="bi bi-trash me-1"></i>Sil
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="modal fade" id="deleteModal_@(blog.BlogId)" tabindex="-1" aria-labelledby="deleteModalLabel_@(blog.BlogId)" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title" id="deleteModalLabel_@(blog.BlogId)">
+                                                            <i class="bi bi-exclamation-triangle me-2"></i>Blog Yazısını Sil
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="mb-0">
+                                                            "<strong>@blog.Title</strong>" başlıklı blog yazısını silmek istediğinize emin misiniz?
+                                                            Bu işlem geri alınamaz.
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            <i class="bi bi-x-circle me-1"></i>İptal
+                                                        </button>
+                                                        <form asp-controller="Blog" asp-action="DeleteBlog" asp-route-id="@blog.BlogId" method="post">
+                                                            <button type="submit" class="btn btn-danger">
+                                                                <i class="bi bi-trash me-1"></i>Sil
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            }
+                            </div>
+
+                        @if (Model.TotalPage > 1)
+                        {
+                                    <nav aria-label="Page navigation" class="mt-4">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                                                <a class="page-link" asp-controller="User" asp-action="MyBlogs" asp-route-pageNumber="@(Model.CurrentPage - 1)">Önceki</a>
+                                            </li>
+                                    @for (int i = 1; i <= Model.TotalPage; i++)
+                                    {
+                                                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" asp-controller="User" asp-action="MyBlogs" asp-route-pageNumber="@i">@i</a>
+                                                    </li>
+                                    }
+                                            <li class="page-item @(Model.CurrentPage == Model.TotalPage ? "disabled" : "")">
+                                                <a class="page-link" asp-controller="User" asp-action="MyBlogs" asp-route-pageNumber="@(Model.CurrentPage + 1)">Sonraki</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                        }
+
+                            <div class="text-center mt-3">
+                                <a asp-controller="Blog" asp-action="CreateBlog" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-2"></i>Yeni Blog Yazısı Ekle
+                                </a>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

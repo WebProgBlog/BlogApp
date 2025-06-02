@@ -71,14 +71,12 @@ namespace BlogApp.DataLayer.Concrete.EfCore
             return _context.Users.FirstOrDefault(u => u.UserId == id);
         }
 
-        public void DeleteUser(int id)
+        public void DeleteUser(User user)
         {
-            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-                _context.SaveChanges();
-            }
+            _context.Users.Remove(user);
+            _context.SaveChanges();
         }
+
+       
     }
 }

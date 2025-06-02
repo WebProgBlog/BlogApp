@@ -44,9 +44,9 @@ namespace BlogApp.BusinessLayer.Concrete
             return _userRepository.SaveChangesAsync();
         }
 
-        public void DeleteUser(int userId)
+        public void DeleteUser(User user)
         {
-            _userRepository.DeleteUser(userId);
+            _userRepository.DeleteUser(user);
         }
 
         public User GetUserById(int userId)

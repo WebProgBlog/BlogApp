@@ -11,7 +11,7 @@ namespace BlogApp.BusinessLayer.Abstract
         Task<bool> UpdateUserImage(int userId, string imageName);
         void UpdateUser(User user);
         User GetUserById(int userId);
-        void DeleteUser(int userId);
+        void DeleteUser(User user);
         Task<bool> SaveChangesAsync();
     }
 }
