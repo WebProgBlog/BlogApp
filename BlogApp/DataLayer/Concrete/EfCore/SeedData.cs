@@ -35,8 +35,8 @@ namespace BlogApp.Data.Concrete.EfCore
                 if (!context.Users.Any())
                 {
                     context.Users.AddRange(
-                        new User { UserName = "ZeynepOzdes", FirstName = "Zeynep", LastName = "Ozdes", Email = "zozdes@gmail.com", Password = BCrypt.Net.BCrypt.HashPassword("zo123"), Image = "pp1.jpg",Role=Roles.Admin, RegisterDate = DateTime.Now.AddMonths(-3) },
-                        new User { UserName = "IclalMillik", FirstName = "Iclal", LastName = "Millik", Email = "imillik@email.com", Password = BCrypt.Net.BCrypt.HashPassword("im123"), Image = "pp3.jpg", Role =Roles.User, RegisterDate = DateTime.Now.AddDays(-10) },
+                        new User { UserName = "ZeynepOzdes", FirstName = "Zeynep", LastName = "Ozdes", Email = "zozdes@gmail.com", Password = BCrypt.Net.BCrypt.HashPassword("zo123"), Image = "pp1.jpg", Role = Roles.Admin, RegisterDate = DateTime.Now.AddMonths(-3) },
+                        new User { UserName = "IclalMillik", FirstName = "Iclal", LastName = "Millik", Email = "imillik@email.com", Password = BCrypt.Net.BCrypt.HashPassword("im123"), Image = "pp3.jpg", Role = Roles.User, RegisterDate = DateTime.Now.AddDays(-10) },
                         new User { UserName = "SevvalInal", FirstName = "Sevval", LastName = "Inal", Email = "sinal@email.com", Password = BCrypt.Net.BCrypt.HashPassword("si123"), Image = "pp2.jpg", Role = Roles.User, RegisterDate = DateTime.Now }
                     );
                     context.SaveChanges();

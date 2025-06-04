@@ -24,9 +24,9 @@ namespace BlogApp.BusinessLayer.Concrete
             _userRepository.CreateUser(user);
         }
 
-        public User ValidateUser(string email, string password)
+        public User? ValidateUser(string username, string password)
         {
-            return _userRepository.ValidateUser(email, password);
+            return _userRepository.GetUserByUsernameAndPassword(username, password);
         }
 
         public Task<bool> UpdateUserImage(int userId, string imageName)
