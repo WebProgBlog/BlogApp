@@ -13,15 +13,12 @@ namespace BlogApp.DataLayer.Concrete.EfCore
         public IQueryable<User> Users => _context.Users;
         public void CreateUser(User user)
         {
-
-            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-
-
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password); 
             user.RegisterDate = DateTime.Now;
-
             _context.Users.Add(user);
             _context.SaveChanges();
         }
+
         public User ValidateUser(string email, string password)
         {
             var user = _context.Users.FirstOrDefault(x => x.Email == email);
@@ -71,14 +68,20 @@ namespace BlogApp.DataLayer.Concrete.EfCore
             return _context.Users.FirstOrDefault(u => u.UserId == id);
         }
 
-        public void DeleteUser(int id)
+        public void DeleteUser(User user)
         {
-            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-                _context.SaveChanges();
-            }
+            _context.Users.Remove(user);
+            _context.SaveChanges();
         }
+
+        public User? GetUserByUsernameAndPassword(string username, string password)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.UserName == username);
+            if (user == null) return null;
+
+            bool valid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            return valid ? user : null;
+        }
+
     }
 }

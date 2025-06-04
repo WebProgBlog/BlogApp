@@ -15,7 +15,6 @@ namespace BlogApp.Entities
         public string? FirstName { get; set; }
         [Required(ErrorMessage = "Soyad zorunludur.")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Soyad 2-50 karakter arasında olmalıdır.")]
-
         public string? LastName { get; set; }
 
 
@@ -29,12 +28,14 @@ namespace BlogApp.Entities
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
-
-
         public string? Image { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime RegisterDate { get; set; } = DateTime.Now;
+
+        [Required]
+        [StringLength(20)]
+        public string Role { get; set; } = "User";  
 
         public List<Blog> Blogs { get; set; } = new List<Blog>();
 

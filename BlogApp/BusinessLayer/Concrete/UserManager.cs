@@ -24,9 +24,9 @@ namespace BlogApp.BusinessLayer.Concrete
             _userRepository.CreateUser(user);
         }
 
-        public User ValidateUser(string email, string password)
+        public User? ValidateUser(string username, string password)
         {
-            return _userRepository.ValidateUser(email, password);
+            return _userRepository.GetUserByUsernameAndPassword(username, password);
         }
 
         public Task<bool> UpdateUserImage(int userId, string imageName)
@@ -44,9 +44,9 @@ namespace BlogApp.BusinessLayer.Concrete
             return _userRepository.SaveChangesAsync();
         }
 
-        public void DeleteUser(int userId)
+        public void DeleteUser(User user)
         {
-            _userRepository.DeleteUser(userId);
+            _userRepository.DeleteUser(user);
         }
 
         public User GetUserById(int userId)
