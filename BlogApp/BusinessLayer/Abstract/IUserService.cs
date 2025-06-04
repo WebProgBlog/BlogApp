@@ -5,9 +5,9 @@ namespace BlogApp.BusinessLayer.Abstract
 {
     public interface IUserService
     {
+        User? ValidateUser(string username, string password);
         IQueryable<User> GetAllUsers();
         void CreateUser(User user);
-        User ValidateUser(string email, string password);
         Task<bool> UpdateUserImage(int userId, string imageName);
         void UpdateUser(User user);
         User GetUserById(int userId);

@@ -7,6 +7,7 @@ namespace BlogApp.DataLayer.Abstract
         IQueryable<User> Users { get; }
         void CreateUser(User user);
         User ValidateUser(string email, string password);
+        User? GetUserByUsernameAndPassword(string username, string password);
         User GetByUserId(int id);
         void DeleteUser(User user);
         Task<bool> UpdateUserImage(int userId, string imageName);
