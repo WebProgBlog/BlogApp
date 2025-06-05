@@ -17,9 +17,9 @@
                 <div class="card-body">
                     @if (TempData["ErrorMessage"] != null)
                     {
-                            <div class="alert alert-danger">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["ErrorMessage"]
-                            </div>
+                                <div class="alert alert-danger">
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["ErrorMessage"]
+                                </div>
                     }
 
                     <form asp-controller="Blog" asp-action="CreateBlog" method="post" enctype="multipart/form-data">
@@ -58,7 +58,7 @@
                                     {
                                         foreach (var category in Model.Categories)
                                         {
-                                                    <option value="@category.CategoryId">@category.CategoryName</option>
+                                                            <option value="@category.CategoryId">@category.CategoryName</option>
                                         }
                                     }
                                 </select>
@@ -76,9 +76,9 @@
                         </div>
 
                         <div class="mb-4">
-                            <label asp-for="Image" class="form-label fw-bold">Blog Görseli</label>
-                            <input asp-for="Image" type="file" class="form-control" accept="image/*" />
-
+                            <label asp-for="ImageFile" class="form-label fw-bold"></label>
+                            <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
                         </div>
 
 
@@ -100,64 +100,64 @@
 
 @section Scripts {
 
-        <script src="~/lib/tinymce/tinymce.min.js"></script>
+            <script src="~/lib/tinymce/tinymce.min.js"></script>
 
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                tinymce.init({
-                    selector: '#content-editor',
-                    height: 500,
-                    plugins: [
-                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                        'insertdatetime', 'media', 'table', 'help', 'wordcount'
-                    ],
-                    toolbar: 'undo redo | blocks | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
-                    branding: false,
-                    promotion: false,
-                    menubar: 'file edit view insert format tools table help',
-                    language: 'tr'
-                });
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    tinymce.init({
+                        selector: '#content-editor',
+                        height: 500,
+                        plugins: [
+                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                            'insertdatetime', 'media', 'table', 'help', 'wordcount'
+                        ],
+                        toolbar: 'undo redo | blocks | ' +
+                            'bold italic backcolor | alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                            'removeformat | help',
+                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+                        branding: false,
+                        promotion: false,
+                        menubar: 'file edit view insert format tools table help',
+                        language: 'tr'
+                    });
 
-                const titleInput = document.querySelector('#Title');
-                const urlInput = document.querySelector('#Url');
+                    const titleInput = document.querySelector('#Title');
+                    const urlInput = document.querySelector('#Url');
 
-                titleInput.addEventListener('blur', function () {
-                    if (urlInput.value === '') {
-                        const title = titleInput.value;
-                        const url = generateSlug(title);
-                        urlInput.value = url;
+                    titleInput.addEventListener('blur', function () {
+                        if (urlInput.value === '') {
+                            const title = titleInput.value;
+                            const url = generateSlug(title);
+                            urlInput.value = url;
+                        }
+                    });
+
+                    function generateSlug(text) {
+                        return text
+                            .toString()
+                            .toLowerCase()
+                            .trim()
+                            .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
+                            .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c')
+                            .replace(/\s+/g, '-')
+                            .replace(/[^\w\-]+/g, '')
+                            .replace(/\-\-+/g, '-')
+                            .replace(/^-+/, '')
+                            .replace(/-+$/, '');
                     }
-                });
 
-                function generateSlug(text) {
-                    return text
-                        .toString()
-                        .toLowerCase()
-                        .trim()
-                        .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
-                        .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c')
-                        .replace(/\s+/g, '-')
-                        .replace(/[^\w\-]+/g, '')
-                        .replace(/\-\-+/g, '-')
-                        .replace(/^-+/, '')
-                        .replace(/-+$/, '');
-                }
-
-                document.querySelector('form').addEventListener('submit', function (e) {
-                    const categorySelect = document.getElementById('categorySelect');
-                    if (!categorySelect.value) {
-                        e.preventDefault();
-                        alert('Lütfen bir kategori seçin veya yeni bir kategori ekleyin.');
-                    }
+                    document.querySelector('form').addEventListener('submit', function (e) {
+                        const categorySelect = document.getElementById('categorySelect');
+                        if (!categorySelect.value) {
+                            e.preventDefault();
+                            alert('Lütfen bir kategori seçin veya yeni bir kategori ekleyin.');
+                        }
+                    });
                 });
-            });
-        </script>
+            </script>
 
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

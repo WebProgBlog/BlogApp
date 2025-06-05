@@ -19,7 +19,8 @@ namespace BlogApp.Models
         [Display(Name = "Url")]
         public string? Url { get; set; }
         public bool IsActive { get; set; }
-        public IFormFile? Image { get; set; }
+        [Display(Name = "Blog Görseli")]
+        public IFormFile? ImageFile { get; set; }
         [Required]
         [Display(Name = "Kategori")]
         public int CategoryId { get; set; }

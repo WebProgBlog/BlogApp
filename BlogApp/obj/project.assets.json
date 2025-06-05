@@ -1010,6 +1010,22 @@
           "buildTransitive/Mono.TextTemplating.targets": {}
         }
       },
+      "SixLabors.ImageSharp/3.1.9": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/SixLabors.ImageSharp.props": {}
+        }
+      },
       "Swashbuckle.AspNetCore/8.1.2": {
         "type": "package",
         "dependencies": {
@@ -3778,6 +3794,22 @@
         "readme.md"
       ]
     },
+    "SixLabors.ImageSharp/3.1.9": {
+      "sha512": "8yY4Bcxgw5u7xLWFXb2mK4fbX+0JYJ7eyM19n0inj/cgcHAuIAge982Eiy8vTHT9Zow4HvKJaZKRFBhTNFqD4A==",
+      "type": "package",
+      "path": "sixlabors.imagesharp/3.1.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "build/SixLabors.ImageSharp.props",
+        "lib/net6.0/SixLabors.ImageSharp.dll",
+        "lib/net6.0/SixLabors.ImageSharp.xml",
+        "sixlabors.imagesharp.128.png",
+        "sixlabors.imagesharp.3.1.9.nupkg.sha512",
+        "sixlabors.imagesharp.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/8.1.2": {
       "sha512": "GcfwU8slhnC7ZKOGVkGheuyGgwIpqeLI11mtSO5P6cm1ej7U3LF83Okt9Jp76ar2zI7herN2yLcvIgzP63wgPQ==",
       "type": "package",
@@ -4901,29 +4933,25 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.5",
       "Microsoft.SqlServer.Server >= 1.0.0",
+      "SixLabors.ImageSharp >= 3.1.9",
       "Swashbuckle.AspNetCore >= 8.1.2",
       "Swashbuckle.AspNetCore.Swagger >= 8.1.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\icllm\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\zeyne\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\icllm\\Source\\Repos\\BlogApp\\BlogApp\\BlogApp.csproj",
+      "projectUniqueName": "C:\\Users\\zeyne\\Source\\Repos\\BlogApp\\BlogApp\\BlogApp.csproj",
       "projectName": "BlogApp",
-      "projectPath": "C:\\Users\\icllm\\Source\\Repos\\BlogApp\\BlogApp\\BlogApp.csproj",
-      "packagesPath": "C:\\Users\\icllm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\icllm\\Source\\Repos\\BlogApp\\BlogApp\\obj\\",
+      "projectPath": "C:\\Users\\zeyne\\Source\\Repos\\BlogApp\\BlogApp\\BlogApp.csproj",
+      "packagesPath": "C:\\Users\\zeyne\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\zeyne\\Source\\Repos\\BlogApp\\BlogApp\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\icllm\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\zeyne\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4948,8 +4976,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -4995,6 +5022,10 @@
             "target": "Package",
             "version": "[1.0.0, )"
           },
+          "SixLabors.ImageSharp": {
+            "target": "Package",
+            "version": "[3.1.9, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[8.1.2, )"
@@ -5023,7 +5054,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
