@@ -12,7 +12,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -43,7 +42,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 
 builder.Services.AddSwaggerGen(c =>
@@ -75,6 +73,11 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+});
 
 builder.Services.AddSession(options =>
 {
@@ -83,10 +86,8 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-
 builder.Services.AddDbContext<BlogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("sql_connection")));
-
 
 builder.Services.AddScoped<IBlogRepository, EfBlogRepository>();
 builder.Services.AddScoped<ICategoryRepository, EfCategoryRepository>();
@@ -100,7 +101,6 @@ builder.Services.AddScoped<IUserService, UserManager>();
 
 var app = builder.Build();
 
-
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -109,27 +109,32 @@ if (!app.Environment.IsDevelopment())
 
 SeedData.TestData(app);
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
-
-
 
 app.MapControllerRoute(
     name: "blog_category",
     pattern: "kategori/{url}",
     defaults: new { controller = "Blog", action = "Category" }
 );
+
 app.MapControllerRoute(
     name: "blog_details",
     pattern: "blog/{url}",
     defaults: new { controller = "Blog", action = "Details" }
 );
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Blog}/{action=Index}/{id?}");
