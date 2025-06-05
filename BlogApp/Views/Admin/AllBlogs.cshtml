@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<BlogApp.Entities.Blog>
+
+<h2>Blog Listesi</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Yazar</th>
+            <th>Kategori</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.Title</td>
+                <td>@blog.User.UserName</td>
+                <td>@blog.Category?.CategoryName</td>
+                <td>
+                    <form asp-action="DeleteBlog" method="post">
+                        <input type="hidden" name="id" value="@blog.BlogId" />
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

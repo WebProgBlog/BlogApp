@@ -47,13 +47,13 @@
                             <label>Mevcut Resim</label>
                             @if (!string.IsNullOrEmpty(Model.ImageName))
                             {
-                                    <div class="mb-2">
-                                        <img src="~/img/blogs/@Model.ImageName" alt="Blog Görseli" class="img-thumbnail" style="max-height: 200px" />
-                                    </div>
+                                <div class="mb-2">
+                                    <img src="~/img/blogs/@Model.ImageName" alt="Blog Görseli" class="img-thumbnail" style="max-height: 200px" />
+                                </div>
                             }
                             else
                             {
-                                    <p>Henüz bir görsel yüklenmemiş.</p>
+                                <p>Henüz bir görsel yüklenmemiş.</p>
                             }
                         </div>
                         <div class="form-group">
@@ -79,34 +79,34 @@
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
-        <script src="~/lib/tinymce/tinymce.min.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                tinymce.init({
-                    selector: '#Content',
-                    height: 500,
-                    plugins: [
-                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                        'insertdatetime', 'media', 'table', 'help', 'wordcount'
-                    ],
-                    toolbar: 'undo redo | blocks | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
-                    branding: false,
-                    promotion: false,
-                    menubar: 'file edit view insert format tools table help',
-                    language: 'tr',
-                    setup: function (editor) {
-                        editor.on('change', function () {
-                            tinymce.triggerSave();
-                        });
-                    }
-                });
+    <script src="~/lib/tinymce/tinymce.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            tinymce.init({
+                selector: '#Content',
+                height: 500,
+                plugins: [
+                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                    'insertdatetime', 'media', 'table', 'help', 'wordcount'
+                ],
+                toolbar: 'undo redo | blocks | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | help',
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+                branding: false,
+                promotion: false,
+                menubar: 'file edit view insert format tools table help',
+                language: 'tr',
+                setup: function (editor) {
+                    editor.on('change', function () {
+                        tinymce.triggerSave();
+                    });
+                }
             });
-        </script>
+        });
+    </script>
 
 
 }

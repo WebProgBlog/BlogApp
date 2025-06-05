@@ -14,18 +14,18 @@
                 <div class="card-body text-center">
                     @if (TempData["ProfileUpdateSuccess"] != null)
                     {
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="bi bi-check-circle-fill me-2"></i>@TempData["ProfileUpdateSuccess"]
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>@TempData["ProfileUpdateSuccess"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     }
 
                     @if (TempData["ProfileImageError"] != null)
                     {
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["ProfileImageError"]
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["ProfileImageError"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     }
 
                     <img src="~/img/profiles/@Model.ProfileImage" alt="@Model.UserName"
@@ -149,22 +149,22 @@
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 
-        <script>
+    <script>
 
-            document.getElementById('profileImage').addEventListener('change', function(e) {
-                const preview = document.getElementById('imagePreview');
-                const file = e.target.files[0];
+        document.getElementById('profileImage').addEventListener('change', function(e) {
+            const preview = document.getElementById('imagePreview');
+            const file = e.target.files[0];
 
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        preview.src = e.target.result;
-                        preview.style.display = 'block';
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.style.display = 'none';
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
                 }
-            });
-        </script>
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+    </script>
 }

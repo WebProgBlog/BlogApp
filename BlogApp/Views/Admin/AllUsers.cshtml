@@ -1,1 +1,29 @@
-﻿
+﻿@model IEnumerable<BlogApp.Entities.User>
+
+<h2>Kullanıcı Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    <form asp-action="DeleteUser" method="post">
+                        <input type="hidden" name="id" value="@user.UserId" />
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

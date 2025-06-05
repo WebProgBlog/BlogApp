@@ -17,67 +17,79 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BlogApp
 build_property.RootNamespace = BlogApp
-build_property.ProjectDir = C:\Users\zeyne\Downloads\BlogApp\BlogApp\BlogApp\BlogApp\
+build_property.ProjectDir = C:\Users\sevva\Source\Repos\BlogApp\BlogApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\zeyne\Downloads\BlogApp\BlogApp\BlogApp\BlogApp
+build_property.MSBuildProjectDirectory = C:\Users\sevva\Source\Repos\BlogApp\BlogApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Admin/AllBlogs.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Admin/AllBlogs.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWxsQmxvZ3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Admin/AllUsers.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Admin/AllUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWxsVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Blog/CreateBlog.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Blog/CreateBlog.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xDcmVhdGVCbG9nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Blog/Index.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Blog/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Blog/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Blog/UpdateBlog.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Blog/UpdateBlog.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xVcGRhdGVCbG9nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Shared/Components/CategoriesMenu/Default.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Shared/Components/CategoriesMenu/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2F0ZWdvcmllc01lbnVcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Shared/Components/LastPosts/Default.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Shared/Components/LastPosts/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTGFzdFBvc3RzXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Shared/Error.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/User/MyBlogs.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/User/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/User/MyBlogs.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxNeUJsb2dzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/User/Profile.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/User/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/_ViewImports.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/User/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/_ViewStart.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zeyne/Downloads/BlogApp/BlogApp/BlogApp/BlogApp/Views/Shared/_Layout.cshtml]
+[C:/Users/sevva/Source/Repos/BlogApp/BlogApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-gr6vkwv4lw

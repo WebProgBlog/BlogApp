@@ -1,0 +1,89 @@
+﻿@model BlogApp.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    var returnUrl = ViewData["ReturnUrl"] as string;
+    var isSuccess = TempData["RegistrationSuccess"] != null;
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+        @if (isSuccess)
+        {
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Tebrikler!</h4>
+                <p>@TempData["RegistrationSuccess"]</p>
+                <hr>
+                <div class="text-center">
+                    <a class="btn btn-primary" asp-action="Login" asp-route-returnUrl="@returnUrl">Giriş Yap</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Register" asp-route-returnUrl="@returnUrl" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Image" class="control-label"></label>
+                            <input asp-for="Image" type="file" class="form-control" accept="image/*" />
+                            <small class="form-text text-muted">Profil fotoğrafı yükleyebilirsiniz.</small>
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p>Zaten hesabınız var mı? <a asp-action="Login" asp-route-returnUrl="@returnUrl">Giriş Yap</a></p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
