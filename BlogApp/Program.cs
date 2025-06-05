@@ -43,6 +43,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 
 builder.Services.AddSwaggerGen(c =>
@@ -116,6 +117,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
+
+
 
 app.MapControllerRoute(
     name: "blog_category",
