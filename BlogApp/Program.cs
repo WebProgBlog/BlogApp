@@ -43,7 +43,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "Blog API", Version = "v1" });
@@ -98,6 +97,13 @@ builder.Services.AddScoped<IBlogService, BlogManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 builder.Services.AddScoped<IUserService, UserManager>();
+
+
+builder.Services.AddHttpClient<IAIService, AIService>(client =>
+{
+    client.BaseAddress = new Uri("https://api-inference.huggingface.co/");
+    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "hf_nLpLnhqsuhPdUXBqMcuCdVwbPLZ0OCrdAe");
+});
 
 var app = builder.Build();
 

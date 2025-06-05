@@ -8,7 +8,7 @@ using BlogApp.Entities;
 using BlogApp.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+using BlogApp.BusinessLayer.Abstract;
 
 namespace BlogApp.Controllers
 {
@@ -18,13 +18,20 @@ namespace BlogApp.Controllers
         private readonly ICategoryRepository _categoryRepository;
         private readonly ICommentRepository _commentRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IAIService _aiService;
 
-        public BlogController(IBlogRepository blogRepository, ICategoryRepository categoryRepository, ICommentRepository commentRepository, IUserRepository userRepository)
+        public BlogController(
+            IBlogRepository blogRepository,
+            ICategoryRepository categoryRepository,
+            ICommentRepository commentRepository,
+            IUserRepository userRepository,
+            IAIService aiService)
         {
             _blogRepository = blogRepository;
             _categoryRepository = categoryRepository;
             _commentRepository = commentRepository;
             _userRepository = userRepository;
+            _aiService = aiService;
         }
 
         public async Task<IActionResult> Index(int pageNumber = 1, int? categoryId = null)
@@ -206,11 +213,13 @@ namespace BlogApp.Controllers
             if (model.ImageFile != null && model.ImageFile.Length > 0)
             {
                 imagePath = await ImageHelper.SaveResizedImageAsync(
-                model.ImageFile,
-                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "blogs"),
-                600, 400
-            );
+                    model.ImageFile,
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "blogs"),
+                    600, 400
+                );
             }
+
+            var suggestedTags = await _aiService.GetTagsFromContentAsync(model.Content);
 
             var blog = new Blog
             {
@@ -222,7 +231,8 @@ namespace BlogApp.Controllers
                 CreatedDate = DateTime.Now,
                 Image = imagePath,
                 IsActive = true,
-                CategoryId = model.CategoryId
+                CategoryId = model.CategoryId,
+                SuggestedTags = string.Join(", ", suggestedTags)
             };
 
             _blogRepository.CreateBlog(blog);
