@@ -2,6 +2,8 @@
 using BlogApp.DataLayer.Abstract;
 using BlogApp.Entities;
 using BlogApp.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,153 @@ namespace BlogApp.Controllers
             _userRepository = userRepository;
             _blogRepository = blogRepository;
             _categoryRepository = categoryRepository;
+        }
+
+        [HttpGet]
+        public IActionResult Login(string returnUrl = null)
+        {
+            if (User.Identity!.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Blog");
+            }
+            ViewData["ReturnUrl"] = returnUrl;
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (ModelState.IsValid)
+            {
+                var user = _userRepository.ValidateUser(model.Email, model.Password);
+
+                if (user != null)
+                {
+                    var userClaims = new List<Claim>();
+
+                    userClaims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()));
+                    userClaims.Add(new Claim(ClaimTypes.Name, user.UserName ?? ""));
+                    userClaims.Add(new Claim(ClaimTypes.Email, user.Email ?? ""));
+                    userClaims.Add(new Claim(ClaimTypes.UserData, user.Image ?? ""));
+
+
+                    var claimsIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    var authProperties = new AuthenticationProperties
+                    {
+                        IsPersistent = model.RememberMe
+                    };
+
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
+                        authProperties
+                    );
+                    HttpContext.Session.SetString("UserName", user.UserName ?? "");
+                    HttpContext.Session.SetString("UserEmail", user.Email ?? "");
+                    HttpContext.Session.SetInt32("UserId", user.UserId);
+
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+
+                    return RedirectToAction("Index", "Blog");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Eposta veya şifre hatalı");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Blog");
+        }
+
+        [HttpGet]
+        public IActionResult Register(string returnUrl = null)
+        {
+            if (User.Identity!.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Blog");
+            }
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var existingUser = _userRepository.Users.FirstOrDefault(x => x.Email == model.Email || x.UserName == model.UserName);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("", "Kullanıcı adı veya email adresi kullanılmıştır.");
+                    return View(model);
+                }
+
+                var user = new User
+                {
+                    UserName = model.UserName,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    Password = model.Password,
+                    Image = "default.jpg",
+                    RegisterDate = DateTime.Now
+                };
+                _userRepository.CreateUser(user);
+
+                if (model.Image != null && model.Image.Length > 0)
+                {
+                    string extension = Path.GetExtension(model.Image.FileName);
+                    if (string.IsNullOrEmpty(extension))
+                    {
+                        extension = ".jpg";
+                    }
+                    string imageFileName = user.UserId + extension;
+
+                    string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "profiles");
+
+
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    string filePath = Path.Combine(uploadsFolder, imageFileName);
+
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.Image.CopyToAsync(fileStream);
+                    }
+
+                    user.Image = imageFileName;
+                    await _userRepository.UpdateUserImage(user.UserId, imageFileName);
+                }
+
+                TempData["RegistrationSuccess"] = "Kayıt işleminiz başarıyla tamamlandı! ";
+
+
+                return RedirectToAction("Register", new { returnUrl });
+
+            }
+
+            return View(model);
         }
 
         [Authorize(Roles = "User")]
