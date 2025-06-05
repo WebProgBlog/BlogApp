@@ -1,5 +1,4 @@
-﻿
-using BlogApp.DataLayer.Abstract;
+﻿using BlogApp.DataLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

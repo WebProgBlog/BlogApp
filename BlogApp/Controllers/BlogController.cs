@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BlogApp.DataLayer.Concrete.EfCore;
 using BlogApp.Entities;
+using BlogApp.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BlogApp.Controllers
 {
@@ -179,6 +181,7 @@ namespace BlogApp.Controllers
             }
 
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
             if (!string.IsNullOrEmpty(model.NewCategoryName))
             {
                 var existingCategory = await _categoryRepository.Categories
@@ -199,15 +202,25 @@ namespace BlogApp.Controllers
                 }
             }
 
+            string? imagePath = null;
+            if (model.ImageFile != null && model.ImageFile.Length > 0)
+            {
+                imagePath = await ImageHelper.SaveResizedImageAsync(
+                model.ImageFile,
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "blogs"),
+                600, 400
+            );
+            }
+
             var blog = new Blog
             {
                 Title = model.Title,
                 Content = model.Content,
                 Description = model.Description,
-                Url = model.Url,
+                Url = model.Url ?? model.Title.ToLower().Replace(" ", "-"),
                 UserId = userId,
                 CreatedDate = DateTime.Now,
-                Image = "default.jpg",
+                Image = imagePath,
                 IsActive = true,
                 CategoryId = model.CategoryId
             };

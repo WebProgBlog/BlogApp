@@ -52,6 +52,8 @@ namespace BlogApp.Controllers
                     userClaims.Add(new Claim(ClaimTypes.Name, user.UserName ?? ""));
                     userClaims.Add(new Claim(ClaimTypes.Email, user.Email ?? ""));
                     userClaims.Add(new Claim(ClaimTypes.UserData, user.Image ?? ""));
+                    userClaims.Add(new Claim(ClaimTypes.Role, "User"));
+
 
 
                     var claimsIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -89,6 +91,7 @@ namespace BlogApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
