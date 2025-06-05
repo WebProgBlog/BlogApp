@@ -1,0 +1,173 @@
+﻿@model BlogApp.Entities.Blog
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-body">
+                    <h1 class="card-title mb-3">@Model.Title</h1>
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div>
+                            <div class="text-muted small">Yazar</div>
+                            <div class="fw-bold">@Model.User.FirstName @Model.User.LastName</div>
+                        </div>
+                        <div class="ms-auto text-end">
+                            <div class="text-muted small">Yayınlanma Tarihi</div>
+                            <div>@Model.CreatedDate.ToString("dd MMMM yyyy")</div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <img src="~/img/blogs/@Model.Image" class="card-img-top" alt="@Model.Title">
+
+
+                <div class="card-body">
+                    <div class="blog-content">
+                        @Html.Raw(Model.Content)
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="bi bi-chat-left-text me-2"></i>
+                        <span id="commentCount">Yorumlar (@Model.Comments.Count)</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (!Model.Comments.Any())
+                    {
+                        <div id="comments">
+                            <p id="emptyCommentText" class="text-muted text-center my-3">Henüz yorum yapılmamış. İlk yorumu sen yap!</p>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div id="comments">
+                            @foreach (var comment in Model.Comments.OrderBy(c => c.CreatedDate))
+                            {
+                                <div class="d-flex mb-4">
+                                    <img src="~/img/profiles/@comment.User.Image" class="rounded-circle me-3" width="50" height="50" alt="">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <h6 class="mb-0">@comment.User.FirstName @comment.User.LastName</h6>
+                                            <small class="text-muted ms-2">@comment.CreatedDate.ToString()</small>
+                                        </div>
+                                        <p class="mb-0">@comment.Text</p>
+                                    </div>
+                                </div>
+                                @if (comment != Model.Comments.OrderBy(c => c.CreatedDate).Last())
+                                {
+                                    <hr>
+                                }
+                            }
+                        </div>
+                    }
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <h5 class="mb-3">Yorum Yap</h5>
+                        <form id="commentForm">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="BlogId" name="BlogId" value="@Model.BlogId" />
+                            <div class="mb-3">
+                                <textarea id="Text" name="Text" class="form-control" rows="4" placeholder="Yorumunuzu buraya yazın..." required></textarea>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" id="btnYorumKayit" class="btn btn-primary">
+                                    <i class="bi bi-send me-2"></i>Yorum Gönder
+                                </button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <hr class="my-4">
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Yorum yapabilmek için <a asp-controller="User" asp-action="Login" class="alert-link">giriş yapmanız</a> gerekmektedir.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4">
+
+
+            <vc:categories-menu></vc:categories-menu>
+
+            <vc:last-posts></vc:last-posts>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("Document ready!");
+
+            $("#btnYorumKayit").click(function () {
+                console.log("Yorum butonu tıklandı");
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Blog/AddComment',
+                    dataType: 'json',
+                    data: {
+                        BlogId: $('#BlogId').val(),
+                        Text: $('#Text').val()
+                    },
+                    success: function (yorum) {
+                        console.log("Başarılı yanıt:", yorum);
+
+                        var date = new Date(yorum.createdDate);
+
+
+                        $("#emptyCommentText").remove();
+                        $("#comments").append(`
+                            <div class="d-flex mb-4">
+                                <img src="/img/profiles/${yorum.avatar}" class="rounded-circle me-3" width="50" height="50" alt="">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <h6 class="mb-0">${yorum.username}</h6>
+                                        <small class="text-muted ms-2">${date.toLocaleString()}</small>
+                                    </div>
+                                    <p class="mb-0">${yorum.text}</p>
+                                </div>
+                            </div>
+                            <hr>
+                        `);
+
+                        $("#Text").val('');
+
+
+                        var currentCount = $("#commentCount").text();
+                        var count = parseInt(currentCount.match(/\d+/)[0]) + 1;
+                        $("#commentCount").text(`Yorumlar (${count})`);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Hata:", error);
+                        console.log("Hata detayı:", xhr.responseText);
+                        alert("Yorum eklenirken bir hata oluştu. Lütfen tekrar deneyin.");
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}
