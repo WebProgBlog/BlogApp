@@ -34,16 +34,15 @@ namespace BlogApp.Entities
 
         [Required(ErrorMessage = "Kullanıcı seçilmelidir.")]
         public int UserId { get; set; }
-
         public User User { get; set; } = null!;
 
         public List<Comment> Comments { get; set; } = new List<Comment>();
 
         [Required(ErrorMessage = "Kategori seçilmelidir.")]
         public int CategoryId { get; set; }
-
         public Category Category { get; set; } = null!;
 
-
+        [StringLength(300)]
+        public string? SuggestedTags { get; set; }
     }
 }
