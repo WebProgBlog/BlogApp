@@ -113,6 +113,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<BlogDbContext>();
+    context.Database.Migrate();
+}
+
+
 SeedData.TestData(app);
 
 if (app.Environment.IsDevelopment())

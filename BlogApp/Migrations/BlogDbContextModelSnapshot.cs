@@ -50,6 +50,10 @@ namespace BlogApp.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<string>("SuggestedTags")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
